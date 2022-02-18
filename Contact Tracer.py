@@ -21,6 +21,7 @@ while scanner == True:
     Qr_info = pyzbar.decode(frame)
     for Check_profile in Qr_info:
         Person_data = Check_profile.data.decode('utf-8')
+        # Detect the QR code in the webcam.
         Detect = np.array([Check_profile.polygon], np.int32)
         Detect = Detect.reshape((-1,1,2))
         cv2.polylines(frame,[Detect],True,(255,0,255),5)
