@@ -2,16 +2,19 @@
 
 # Contact Tracing App
 # - A python program that will read QRCode using your webcam
-# - All data read from QRCode will be stored in a text file including the date and time it was read
+# - All data read from QRCode will be stored in a text file including the date and time it was read.
 
 import cv2
 import numpy as np
 import pyzbar.pyzbar as pyzbar
+from datetime import datetime
 
+# Access the webcam of the pc.
 cap = cv2.VideoCapture(0)
 cap.set(3,640)
 cap.set(4,480)
 
+# This part will serve as the scanner and decoder of the data in the QR code.
 scanner = True
 while scanner == True:
     _, frame = cap.read()
@@ -27,6 +30,11 @@ while scanner == True:
     if key == 27:
         break
 
+# Stores the decode data in the QR code in a text file including the date and time it was scanned/read.
+DT = datetime.now()
+date_time = DT.strftime("Date Visited: %B%d%Y\nTime Visited: %I:%M:%S")
+linesep = '--------------------------------------------------'
 txtfile = open('Trace Record.txt', 'a')
 txtfile.write(Person_data + '\n' )
+txtfile.write(date_time + '\n')
 txtfile.write(linesep + '\n')
