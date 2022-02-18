@@ -8,7 +8,6 @@ import cv2
 import numpy as np
 import pyzbar.pyzbar as pyzbar
 
-
 cap = cv2.VideoCapture(0)
 cap.set(3,640)
 cap.set(4,480)
@@ -22,7 +21,12 @@ while scanner == True:
         Detect = np.array([Check_profile.polygon], np.int32)
         Detect = Detect.reshape((-1,1,2))
         cv2.polylines(frame,[Detect],True,(255,0,255),5)
-        print(Person_data)
         scanner = False
     cv2.imshow('Scanner', frame)
     key = cv2.waitKey(1)
+    if key == 27:
+        break
+
+txtfile = open('Trace Record.txt', 'a')
+txtfile.write(Person_data + '\n' )
+txtfile.write(linesep + '\n')
