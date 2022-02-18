@@ -32,7 +32,7 @@ while scanner == True:
 
 # Stores the decode data in the QR code in a text file including the date and time it was scanned/read.
 DT = datetime.now()
-date_time = DT.strftime("Date Visited: %B%d%Y\nTime Visited: %I:%M:%S")
+date_time = DT.strftime("Date Visited: %B %d, %Y\nTime Visited: %I:%M:%S")
 linesep = '--------------------------------------------------'
 txtfile = open('Trace Record.txt', 'a')
 txtfile.write(Person_data + '\n' )
