@@ -5,6 +5,7 @@
 # - All data read from QRCode will be stored in a text file including the date and time it was read
 
 import cv2
+import numpy as np
 import pyzbar.pyzbar as pyzbar
 
 
@@ -18,6 +19,9 @@ while scanner == True:
     Qr_info = pyzbar.decode(frame)
     for Check_profile in Qr_info:
         Person_data = Check_profile.data.decode('utf-8')
+        Detect = np.array([Check_profile.polygon], np.int32)
+        Detect = Detect.reshape((-1,1,2))
+        cv2.polylines(frame,[Detect],True,(255,0,255),5)
         print(Person_data)
         scanner = False
     cv2.imshow('Scanner', frame)
